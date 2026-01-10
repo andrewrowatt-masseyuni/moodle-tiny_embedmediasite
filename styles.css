@@ -14,3 +14,7 @@
 #tiny_embedmediasite_no_more_content {
     margin: 1em 0 0 0;
 }
+
+#tiny_embedmediasite_footer {
+    width: 100%; /* Ensure footer content is not right aligned (which is the Moodle default) */
+}
