@@ -44,14 +44,15 @@ export const handleAction = async(editor) => {
  */
 // eslint-disable-next-line no-unused-vars
 const displayDialogue = async(editor) => {
-    // const data = Object.assign({}, {});
     let page = 1; // Track which "page" of data to load
+
+    // Get first page of presentations. The template (mostly) handles the case of zero presentations.
     let presentations = await getMyMediasitePresentations(page)
             .catch((error) => displayException(error));
 
     // Show modal with buttons.
     const modal = await EmbedMediasiteModal.create({
-        templateContext: {presentations: presentations}, // await getTemplateContext(editor, data),
+        templateContext: {presentations: presentations},
         large: true,
         removeOnClose: true,
     });
@@ -61,20 +62,19 @@ const displayDialogue = async(editor) => {
     const loadingIndicator = document.getElementById('tiny_embedmediasite_loading');
     const noMoreContentIndicator = document.getElementById('tiny_embedmediasite_no_more_content');
 
-
     /**
      * Load the second and subsequent pages of content.
      *
      * @param {*} pageNumber
      * @return {number} Number of presentations loaded
      */
-    async function loadMoreContent2(pageNumber) {
-        // Get the next page of presentations.
+    async function loadMoreContent(pageNumber) {
+        // Get a page of presentations.
         const presentations = await getMyMediasitePresentations(pageNumber)
             .catch((error) => displayException(error));
 
         if (!presentations?.length) {
-            // No more presentations to load or some other condition (e.g., user does not have access).
+            // Short circuit if no presentations.
             return 0;
         }
 
@@ -95,7 +95,7 @@ const displayDialogue = async(editor) => {
             observer.unobserve(loadingIndicator);
 
             page++;
-            if (await loadMoreContent2(page)) {
+            if (await loadMoreContent(page)) {
                 // Re-observe the indicator after fetch completes
                 observer.observe(loadingIndicator);
             } else {
@@ -112,19 +112,4 @@ const displayDialogue = async(editor) => {
 
     // Start observing the loading indicator element
     observer.observe(loadingIndicator);
-};
-
-/**
- * Get the template context for the dialogue.
- *
- * @param {Editor} editor
- * @param {object} data
- * @returns {object} data
- */
-// eslint-disable-next-line no-unused-vars
-const getTemplateContext = async(editor, data) => {
-    const page = 1;
-    return Object.assign({}, {
-        presentations: await getMyMediasitePresentations(page),
-    }, data);
 };
