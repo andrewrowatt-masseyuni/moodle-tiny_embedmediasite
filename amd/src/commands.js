@@ -23,10 +23,11 @@
 
 import {getButtonImage} from 'editor_tiny/utils';
 import {get_string as getString} from 'core/str';
+import {handleAction} from './ui';
 import {component, buttonName, icon} from 'tiny_embedmediasite/common';
 import Notification from 'core/notification';
 
-import {getMyMediasitePresentations} from './repository';
+
 
 export const getSetup = async() => {
     const [
@@ -46,21 +47,7 @@ export const getSetup = async() => {
             icon,
             tooltip: buttonTitle,
             onAction: () => {
-                // TODO do the action when toolbar button is pressed.
-                const page = 1;
-                getMyMediasitePresentations(page).then(function(data) {
-                    window.console.log('Received data from getMyMediasitePresentations:');
-                    window.console.log(data);
-                    return data;
-                }).catch(function(err) {
-                    window.console.log('Error occurred while fetching presentations:');
-                    window.console.log(err);
-                });
-
-                // window.console.log(response);
-
-                Notification.alert("Plugin tiny_embedmediasite", "You just pressed a toolbar button 3");
-
+                handleAction(editor);
             },
         });
 
