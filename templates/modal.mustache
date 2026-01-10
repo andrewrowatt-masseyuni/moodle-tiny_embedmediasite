@@ -31,7 +31,7 @@
         <div id="tiny_embedmediasite_content-container">
         {{> tiny_embedmediasite/_presentations }}
         </div>
-        <div id="tiny_embedmediasite_loading"{{^presentations}} style="display: none;"{{/presentations}}>{{#str}} loadingmorecontent, tiny_embedmediasite {{/str}}</div>
+        <div id="tiny_embedmediasite_loading"{{^presentations}} style="display: none;"{{/presentations}}><i class="fa-solid fa-sync fa-spin"></i> {{#str}} loadingmorecontent, tiny_embedmediasite {{/str}}</div>
         <div id="tiny_embedmediasite_no_more_content" style="display: none;">{{#str}} nomorecontent, tiny_embedmediasite {{/str}}</div>
         {{^presentations}}<div id="tiny_embedmediasite_no_content_found">{{#str}} nocontentfound, tiny_embedmediasite {{/str}}</div>{{/presentations}}
     {{/body}}
