@@ -5,8 +5,12 @@
     }
 }
 
-#loading {
+#tiny_embedmediasite_loading {
     text-align: center;
-    padding: 20px;
-    font-weight: bold;
+    margin: 1em 0 0 0;
+    font-weight: 400;
+}
+
+#tiny_embedmediasite_no_more_content {
+    margin: 1em 0 0 0;
 }
