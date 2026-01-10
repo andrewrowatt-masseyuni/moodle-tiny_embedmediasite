@@ -42,63 +42,67 @@ export const handleAction = async(editor) => {
  *
  * @param  {TinyMCE} editor
  */
+// eslint-disable-next-line no-unused-vars
 const displayDialogue = async(editor) => {
-    const data = Object.assign({}, {});
+    // const data = Object.assign({}, {});
+    let page = 1; // Track which "page" of data to load
+    let presentations = await getMyMediasitePresentations(page)
+            .catch((error) => displayException(error));
 
     // Show modal with buttons.
     const modal = await EmbedMediasiteModal.create({
-        templateContext: await getTemplateContext(editor, data),
+        templateContext: {presentations: presentations}, // await getTemplateContext(editor, data),
         large: true,
         removeOnClose: true,
     });
 
     await modal.show();
 
-    // const contentContainer = document.getElementById('tiny_embedmediasite_content-container');
     const loadingIndicator = document.getElementById('tiny_embedmediasite_loading');
-    let page = 1; // Track which "page" of data to load
+    const noMoreContentIndicator = document.getElementById('tiny_embedmediasite_no_more_content');
+
 
     /**
      * Load the second and subsequent pages of content.
      *
      * @param {*} pageNumber
+     * @return {number} Number of presentations loaded
      */
-    function loadMoreContent(pageNumber) {
-        const presentations = getMyMediasitePresentations(pageNumber);
-        presentations.then(newPresentations => {
-            // eslint-disable-next-line promise/no-nesting
-            Templates.renderForPromise('tiny_embedmediasite/_presentations',
-                {presentations: newPresentations}).then(({html, js}) => {
-                    Templates.appendNodeContents('#tiny_embedmediasite_content-container', html, js);
-                return newPresentations;
-            })
-            // Deal with this exception (Using core/notify exception function is recommended).
+    async function loadMoreContent2(pageNumber) {
+        // Get the next page of presentations.
+        const presentations = await getMyMediasitePresentations(pageNumber)
             .catch((error) => displayException(error));
 
-            return newPresentations;
-        }).catch(error => {
-            window.console.error('Error loading more content:', error);
-        });
+        if (!presentations?.length) {
+            // No more presentations to load or some other condition (e.g., user does not have access).
+            return 0;
+        }
+
+        // Render and append the new presentations.
+        const {html, js} = await Templates.renderForPromise(
+            'tiny_embedmediasite/_presentations',
+            {presentations: presentations}
+        );
+        Templates.appendNodeContents('#tiny_embedmediasite_content-container', html, js);
+        return presentations.length;
     }
 
     // Set up the Intersection Observer
-    const observer = new IntersectionObserver(entries => {
-        window.console.log('IntersectionObserver', entries[0]);
+    const observer = new IntersectionObserver(async entries => {
         // Check if the loading indicator is visible
         if (entries[0].isIntersecting) {
             // Stop observing temporarily to prevent multiple calls while loading
             observer.unobserve(loadingIndicator);
 
             page++;
-            loadMoreContent(page);
-
-            // Re-observe the indicator after a short delay (or after fetch completes)
-            setTimeout(() => {
+            if (await loadMoreContent2(page)) {
+                // Re-observe the indicator after fetch completes
                 observer.observe(loadingIndicator);
-            }, 500);
-
-            // Optional: In a real app, if no more data is available,
-            // you would stop observing the target permanently and hide the indicator.
+            } else {
+                // No more data to load; hide the loading indicator
+                loadingIndicator.style.display = 'none';
+                noMoreContentIndicator.style.display = 'block';
+            }
         }
     }, {
         root: null, // Observe the viewport
@@ -117,6 +121,7 @@ const displayDialogue = async(editor) => {
  * @param {object} data
  * @returns {object} data
  */
+// eslint-disable-next-line no-unused-vars
 const getTemplateContext = async(editor, data) => {
     const page = 1;
     return Object.assign({}, {

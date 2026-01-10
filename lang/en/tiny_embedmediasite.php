@@ -26,5 +26,8 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['buttontitle'] = 'Button for Embed Mediasite video';
+$string['loadingmorecontent'] = 'Loading more content...';
+$string['nocontentfound'] = 'No content found';
+$string['nomorecontent'] = 'No more content to display';
 $string['pluginname'] = 'Embed Mediasite video';
 $string['privacy:metadata'] = 'The Embed Mediasite video plugin doesn\'t store any personal data.';
