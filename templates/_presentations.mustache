@@ -27,8 +27,8 @@
 <div class="presentation">
     <div class="title">{{title}}</div>
     <div class="metadata">
-        <div class="date" title="{{#str}} timecreated {{/str}}"><small>{{date_formatted}}</small></div>
+        <div class="date" title="{{#str}} timecreated {{/str}}"><span>{{#str}} timecreated {{/str}}</span><small>{{date_formatted}}</small></div><div class="date" title="{{#str}} duration, tiny_embedmediasite {{/str}}"><span>{{#str}} duration, tiny_embedmediasite {{/str}}</span><small>{{duration_formatted}}</small></div>
     </div>
-    <div class="actions"><button class="btn btn-secondary btn-sm tiny-embedmediasite-insert-button" data-title="{{title}}" data-source="{{source}}">Select</button></div>
+    <div class="actions"><button class="btn btn-secondary btn-sm tiny-embedmediasite-insert-button" data-title="{{title}}" data-source="{{source}}">{{#str}} insertmediasitelink, tiny_embedmediasite {{/str}}</button></div>
 </div>
 {{/presentations}}
