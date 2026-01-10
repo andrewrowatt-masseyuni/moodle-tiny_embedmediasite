@@ -22,7 +22,6 @@
  */
 
 import Modal from 'core/modal';
-// import ModalRegistry from 'core/modal_registry';
 
 export default class EmbedMediasiteModal extends Modal {
     static TYPE = 'tiny_embedmediasite/modal';
@@ -33,7 +32,3 @@ export default class EmbedMediasiteModal extends Modal {
         super.registerEventListeners();
     }
 }
-
-// ModalRegistry.register(EmbedMediasiteModal.TYPE, EmbedMediasiteModal, EmbedMediasiteModal.TEMPLATE);
-
-// export default EmbedMediasiteModal;
