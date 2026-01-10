@@ -59,6 +59,23 @@ const displayDialogue = async(editor) => {
 
     await modal.show();
 
+    const contentContainer = document.getElementById('tiny_embedmediasite_content-container');
+    contentContainer.addEventListener('click', async event => {
+        const target = event.target;
+        if (target && target.classList.contains('tiny-embedmediasite-insert-button')) {
+            // const source = target.dataset.source;
+            // const title = target.dataset.title;
+            const {html} = await Templates.renderForPromise(
+                'tiny_embedmediasite/_embedlink', {
+                    source: target.dataset.source,
+                    title: target.dataset.title
+                });
+            // const embedcode = `<a title="${title}" href="${source}">${title}</a>`;
+            editor.insertContent(html);
+            modal.destroy();
+        }
+    });
+
     const loadingIndicator = document.getElementById('tiny_embedmediasite_loading');
     const noMoreContentIndicator = document.getElementById('tiny_embedmediasite_no_more_content');
 

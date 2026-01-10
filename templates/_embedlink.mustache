@@ -15,20 +15,14 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template tiny_embedmediasite/_presentations
+    @template tiny_embedmediasite/_embedlink
 
-    TODO describe template _presentations
+    TODO describe template _embedlink
 
     Example context (json):
     {
+        "title": "Lorem ipsum",
+        "source": "https://domain/mediasite/Play/612459be03ae42bb88b7b9881d25a99b1d"
     }
 }}
-{{#presentations}}
-<div class="presentation">
-    <div class="title">{{title}}</div>
-    <div class="metadata">
-        <div class="date" title="{{#str}} timecreated {{/str}}"><small>{{date_formatted}}</small></div>
-    </div>
-    <div class="actions"><button class="btn btn-secondary btn-sm tiny-embedmediasite-insert-button" data-title="{{title}}" data-source="{{source}}">Select</button></div>
-</div>
-{{/presentations}}
+<a title="{{title}}" href="{{source}}" target="_blank" data-source="tiny_embedmediasite">{{title}}</a>

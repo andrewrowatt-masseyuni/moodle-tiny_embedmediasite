@@ -25,7 +25,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['buttontitle'] = 'Button for Embed Mediasite video';
+$string['buttontitle'] = 'Embed Mediasite video';
+$string['embedhelptext'] = '[[Some text to say a link is inserted but it should be embedded when saved]]';
 $string['loadingmorecontent'] = 'Loading more content...';
 $string['nocontentfound'] = 'No content found';
 $string['nomorecontent'] = 'No more content to display';
