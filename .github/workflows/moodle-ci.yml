@@ -112,8 +112,12 @@ jobs:
           PHPUNIT_ENVIRONMENT: ${{ secrets.PHPUNIT_ENVIRONMENT }}
 
       - name: PHPUnit tests - Core privacy (AJR)
-        if: ${{ !cancelled() }}
+        if: ${{ !cancelled() && matrix.moodle-branch < 'MOODLE_501_STABLE' }}
         run: moodle/vendor/bin/phpunit --configuration moodle/phpunit.xml moodle/privacy/tests/privacy/provider_test.php
+
+      #- name: PHPUnit tests - Core privacy Moodle 5.1+ (AJR)
+      #  if: ${{ !cancelled() && matrix.moodle-branch >= 'MOODLE_501_STABLE' }}
+      #  run: moodle/vendor/bin/phpunit --configuration moodle/phpunit.xml moodle/public/privacy/tests/privacy/provider_test.php
 
       - name: Behat features
         id: behat
