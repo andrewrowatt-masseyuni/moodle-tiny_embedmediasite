@@ -25,14 +25,15 @@ import {getButtonImage} from 'editor_tiny/utils';
 import {get_string as getString} from 'core/str';
 import {handleAction} from './ui';
 import {component, buttonName, icon} from 'tiny_embedmediasite/common';
-import Notification from 'core/notification';
 
 export const getSetup = async() => {
     const [
-        buttonTitle,
+        toolbarTitle,
+        menuTitle,
         buttonImage,
     ] = await Promise.all([
-        getString('buttontitle', component),
+        getString('toolbartitle', component),
+        getString('menutitle', component),
         getButtonImage('icon', component),
     ]);
 
@@ -43,20 +44,15 @@ export const getSetup = async() => {
         // Register the toolbar Button.
         editor.ui.registry.addButton(buttonName, {
             icon,
-            tooltip: buttonTitle,
-            onAction: () => {
-                handleAction(editor);
-            },
+            tooltip: toolbarTitle,
+            onAction: () => handleAction(editor),
         });
 
         // Register the Menu item.
         editor.ui.registry.addMenuItem(buttonName, {
             icon,
-            text: buttonTitle,
-            onAction: () => {
-                // TODO do the action when item is selected from the menu.
-                Notification.alert("Plugin tiny_embedmediasite", "You just selected an item from a menu");
-            },
+            text: menuTitle,
+            onAction: () => handleAction(editor),
         });
     };
 };

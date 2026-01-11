@@ -26,4 +26,5 @@ export default {
     pluginName: 'tiny_embedmediasite/embedmediasite',
     icon: 'tiny_embedmediasite',
     buttonName: 'tiny_embedmediasite',
+    toolbarName: 'tiny_embedmediasite',
 };
