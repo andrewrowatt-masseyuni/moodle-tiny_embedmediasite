@@ -25,12 +25,11 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['menutitle'] = 'Mediasite video';
-$string['toolbartitle'] = 'Embed Mediasite video';
 $string['duration'] = 'Duration';
 $string['embedhelptext'] = '<b>Note: </b>In the editor, a link will be displayed. The video will display as embedded when saved.';
 $string['insertmediasitelink'] = 'Insert';
 $string['loadingmorecontent'] = 'Loading more content...';
+$string['menutitle'] = 'Mediasite video';
 $string['nocontentfound'] = 'No content found';
 $string['nomorecontent'] = 'No more content to display';
 $string['pluginname'] = 'Embed Mediasite video';
@@ -38,3 +37,4 @@ $string['privacy:metadata'] = 'The Embed Mediasite video plugin doesn\'t store a
 $string['refreshthumbnails'] = 'Refresh thumbnails';
 $string['thumbnailhelptext'] = 'Log into My Mediasite to fix missing thumbnails.';
 $string['thumbnailof'] = 'Thumbnail of';
+$string['toolbartitle'] = 'Embed Mediasite video';
