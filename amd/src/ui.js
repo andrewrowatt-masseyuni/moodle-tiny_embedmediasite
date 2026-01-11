@@ -49,7 +49,7 @@ const displayDialogue = async(editor) => {
 
     // Show modal with buttons.
     const modal = await EmbedMediasiteModal.create({
-        templateContext: {presentations: presentations},
+        templateContext: presentations,
         large: true,
         removeOnClose: true,
     });
@@ -72,6 +72,17 @@ const displayDialogue = async(editor) => {
 
     const loadingIndicator = document.getElementById('tiny_embedmediasite_loading');
     const noMoreContentIndicator = document.getElementById('tiny_embedmediasite_no_more_content');
+    const refreshThumbnailsButton = document.getElementById('tiny_embedmediasite_refresh_thumbnails');
+
+    refreshThumbnailsButton.addEventListener('click', () => {
+        // Refresh all images in the content container.
+        const images = contentContainer.querySelectorAll('img');
+        images.forEach(img => {
+            const src = img.src;
+            img.src = '';
+            img.src = src;
+        });
+    });
 
     /**
      * Load the second and subsequent pages of content.
@@ -92,7 +103,7 @@ const displayDialogue = async(editor) => {
         // Render and append the new presentations.
         const {html, js} = await Templates.renderForPromise(
             'tiny_embedmediasite/_presentations',
-            {presentations: presentations}
+            presentations
         );
         Templates.appendNodeContents('#tiny_embedmediasite_content-container', html, js);
         return presentations.list.length;

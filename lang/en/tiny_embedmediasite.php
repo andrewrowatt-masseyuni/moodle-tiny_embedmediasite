@@ -34,4 +34,6 @@ $string['nocontentfound'] = 'No content found';
 $string['nomorecontent'] = 'No more content to display';
 $string['pluginname'] = 'Embed Mediasite video';
 $string['privacy:metadata'] = 'The Embed Mediasite video plugin doesn\'t store any personal data.';
+$string['refreshthumbnails'] = 'Refresh thumbnails';
+$string['thumbnailhelptext'] = 'Log into My Mediasite to fix missing thumbnails.';
 $string['thumbnailof'] = 'Thumbnail of';
