@@ -25,8 +25,6 @@ import EmbedMediasiteModal from './modal';
 import Templates from 'core/templates';
 import {exception as displayException} from 'core/notification';
 import {getMyMediasitePresentations} from './repository';
-// import ModalEvents from 'core/modal_events';
-// import {get_strings as getStrings} from 'core/str';
 
 /**
  * Handle action
@@ -42,7 +40,6 @@ export const handleAction = async(editor) => {
  *
  * @param  {TinyMCE} editor
  */
-// eslint-disable-next-line no-unused-vars
 const displayDialogue = async(editor) => {
     let page = 1; // Track which "page" of data to load
 
@@ -63,14 +60,11 @@ const displayDialogue = async(editor) => {
     contentContainer.addEventListener('click', async event => {
         const target = event.target;
         if (target && target.classList.contains('tiny-embedmediasite-insert-button')) {
-            // const source = target.dataset.source;
-            // const title = target.dataset.title;
             const {html} = await Templates.renderForPromise(
                 'tiny_embedmediasite/_embedlink', {
                     source: target.dataset.source,
                     title: target.dataset.title
                 });
-            // const embedcode = `<a title="${title}" href="${source}">${title}</a>`;
             editor.insertContent(html);
             modal.destroy();
         }

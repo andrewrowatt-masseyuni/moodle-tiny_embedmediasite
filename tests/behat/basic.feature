@@ -6,5 +6,5 @@ Feature: Basic tests for Embed mediasite
     Given I log in as "admin"
     When I navigate to "Plugins > Plugins overview" in site administration
     And I follow "Additional plugins"
-    Then I should see "Embed mediasite"
+    Then I should see "Embed Mediasite video"
     And I should see "tiny_embedmediasite"

@@ -27,8 +27,6 @@ import {handleAction} from './ui';
 import {component, buttonName, icon} from 'tiny_embedmediasite/common';
 import Notification from 'core/notification';
 
-
-
 export const getSetup = async() => {
     const [
         buttonTitle,

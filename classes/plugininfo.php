@@ -32,8 +32,7 @@ use editor_tiny\plugin_with_configuration;
  * @copyright  2026 Andrew Rowatt <A.J.Rowatt@massey.ac.nz>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class plugininfo extends plugin implements plugin_with_configuration, plugin_with_buttons, plugin_with_menuitems {
-
+class plugininfo extends plugin implements plugin_with_buttons, plugin_with_configuration, plugin_with_menuitems {
     /**
      * Toolbar buttons provided by this plugin.
      *
@@ -63,8 +62,12 @@ class plugininfo extends plugin implements plugin_with_configuration, plugin_wit
      * @param editor|null $editor The editor instance in which the plugin is initialised
      * @return array
      */
-    public static function get_plugin_configuration_for_context(context $context, array $options, array $fpoptions,
-        ?editor $editor = null): array {
+    public static function get_plugin_configuration_for_context(
+        context $context,
+        array $options,
+        array $fpoptions,
+        ?editor $editor = null
+    ): array {
         return [
             'contextid' => $context->id,
         ];
