@@ -26,7 +26,7 @@ import {call as fetchMany} from 'core/ajax';
 export const getMyMediasitePresentations = (
     page,
 ) => fetchMany([{
-    methodname: 'repository_mymediasite_get_presentations',
+    methodname: 'repository_mediasite_get_presentations',
     args: {
         page,
     },
