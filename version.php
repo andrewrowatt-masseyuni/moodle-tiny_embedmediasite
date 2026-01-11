@@ -28,6 +28,6 @@ $plugin->component    = 'tiny_embedmediasite';
 $plugin->release      = '1.0';
 $plugin->version      = 2026011000;
 $plugin->requires     = 2024100700;
-$plugin->dependencies = ['repository_mymediasite' => 2026011001];
+$plugin->dependencies = ['repository_mediasite' => 2026011001];
 $plugin->supported    = [405, 501];
 $plugin->maturity     = MATURITY_STABLE;
