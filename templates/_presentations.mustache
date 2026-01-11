@@ -17,10 +17,19 @@
 {{!
     @template tiny_embedmediasite/_presentations
 
-    TODO describe template _presentations
+    Displays a list of MediaSite presentations with thumbnails, metadata, and action buttons.
 
     Example context (json):
     {
+        "presentations": [
+            {
+                "title": "Introduction to Course Content",
+                "date_formatted": "January 10, 2026",
+                "duration_formatted": "45 minutes",
+                "source": "https://mediasite.example.com/Mediasite/Play/abc123def456",
+                "thumbnail": "https://mediasite.example.com/mediasite/api/presentations/abc123def456/thumbnail"
+            }
+        ]
     }
 }}
 {{#presentations}}
@@ -32,6 +41,6 @@
         </div>
         <div class="actions"><button class="btn btn-secondary btn-sm tiny-embedmediasite-insert-button" data-title="{{title}}" data-source="{{source}}">{{#str}} insertmediasitelink, tiny_embedmediasite {{/str}}</button><a class="ml-2 btn btn-secondary btn-sm tiny-embedmediasite-view" href="{{source}}" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> {{#str}} view {{/str}}</a></div>
     </div>
-    <div class="presentation_thumbnail">{{#thumbnail}}<img src="{{thumbnail}}">{{/thumbnail}}</div>
+    <div class="presentation_thumbnail">{{#thumbnail}}<img alt="{{#str}} thumbnailof, tiny_embedmediasite {{/str}} {{title}}" src="{{thumbnail}}">{{/thumbnail}}</div>
 </div>
 {{/presentations}}

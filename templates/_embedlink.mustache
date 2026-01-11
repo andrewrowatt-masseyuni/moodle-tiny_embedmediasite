@@ -17,12 +17,12 @@
 {{!
     @template tiny_embedmediasite/_embedlink
 
-    TODO describe template _embedlink
+    Renders a clickable link to a MediaSite presentation that opens in a new window.
 
     Example context (json):
     {
-        "title": "Lorem ipsum",
-        "source": "https://domain/mediasite/Play/612459be03ae42bb88b7b9881d25a99b1d"
+        "title": "Introduction to Course Content",
+        "source": "https://mediasite.example.com/Mediasite/Play/abc123def456"
     }
 }}
 <a title="{{title}}" href="{{source}}" target="_blank" data-source="tiny_embedmediasite">{{title}}</a>
