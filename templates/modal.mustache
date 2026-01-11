@@ -23,19 +23,23 @@
     {
         "presentations": [
             {
-                "title": "Introduction to Course Content",
-                "date_formatted": "January 10, 2026",
-                "duration_formatted": "45 minutes",
-                "source": "https://mediasite.example.com/Mediasite/Play/abc123def456",
-                "thumbnail": "https://mediasite.example.com/mediasite/api/presentations/abc123def456/thumbnail"
-            },
-            {
-                "title": "Advanced Topics Overview",
-                "date_formatted": "January 8, 2026",
-                "duration_formatted": "60 minutes",
-                "source": "https://mediasite.example.com/Mediasite/Play/xyz789uvw321",
-                "thumbnail": "https://mediasite.example.com/mediasite/api/presentations/xyz789uvw321/thumbnail"
-            }
+            "list": [
+                {
+                    "title": "Introduction to Course Content",
+                    "date_formatted": "January 10, 2026",
+                    "duration_formatted": "45 minutes",
+                    "source": "https://mediasite.example.com/Mediasite/Play/abc123def456",
+                    "thumbnail": "https://mediasite.example.com/mediasite/api/presentations/abc123def456/thumbnail"
+                },
+                {
+                    "title": "Advanced Topics Overview",
+                    "date_formatted": "January 8, 2026",
+                    "duration_formatted": "60 minutes",
+                    "source": "https://mediasite.example.com/Mediasite/Play/xyz789uvw321",
+                    "thumbnail": "https://mediasite.example.com/mediasite/api/presentations/xyz789uvw321/thumbnail"
+                }
+            ]
+        }
         ]
     }
 }}
@@ -47,9 +51,9 @@
         <div id="tiny_embedmediasite_content-container">
         {{> tiny_embedmediasite/_presentations }}
         </div>
-        <div id="tiny_embedmediasite_loading"{{^presentations}} style="display: none;"{{/presentations}}><i class="fa-solid fa-sync fa-spin"></i> {{#str}} loadingmorecontent, tiny_embedmediasite {{/str}}</div>
+        <div id="tiny_embedmediasite_loading"{{^presentations.list}} style="display: none;"{{/presentations.list}}><i class="fa-solid fa-sync fa-spin"></i> {{#str}} loadingmorecontent, tiny_embedmediasite {{/str}}</div>
         <div id="tiny_embedmediasite_no_more_content" style="display: none;">{{#str}} nomorecontent, tiny_embedmediasite {{/str}}</div>
-        {{^presentations}}<div id="tiny_embedmediasite_no_content_found">{{#str}} nocontentfound, tiny_embedmediasite {{/str}}</div>{{/presentations}}
+        {{^presentations.list}}<div id="tiny_embedmediasite_no_content_found">{{#str}} nocontentfound, tiny_embedmediasite {{/str}}</div>{{/presentations.list}}
     {{/body}}
     {{$footer}}
         <div id="tiny_embedmediasite_footer">{{#str}} embedhelptext, tiny_embedmediasite {{/str}}</div>

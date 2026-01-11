@@ -84,7 +84,7 @@ const displayDialogue = async(editor) => {
         const presentations = await getMyMediasitePresentations(pageNumber)
             .catch((error) => displayException(error));
 
-        if (!presentations?.length) {
+        if (!presentations.list?.length) {
             // Short circuit if no presentations.
             return 0;
         }
@@ -95,7 +95,7 @@ const displayDialogue = async(editor) => {
             {presentations: presentations}
         );
         Templates.appendNodeContents('#tiny_embedmediasite_content-container', html, js);
-        return presentations.length;
+        return presentations.list.length;
     }
 
     // Set up the Intersection Observer

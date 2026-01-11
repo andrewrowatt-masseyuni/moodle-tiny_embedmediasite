@@ -23,16 +23,27 @@
     {
         "presentations": [
             {
-                "title": "Introduction to Course Content",
-                "date_formatted": "January 10, 2026",
-                "duration_formatted": "45 minutes",
-                "source": "https://mediasite.example.com/Mediasite/Play/abc123def456",
-                "thumbnail": "https://mediasite.example.com/mediasite/api/presentations/abc123def456/thumbnail"
-            }
+            "list": [
+                {
+                    "title": "Introduction to Course Content",
+                    "date_formatted": "January 10, 2026",
+                    "duration_formatted": "45 minutes",
+                    "source": "https://mediasite.example.com/Mediasite/Play/abc123def456",
+                    "thumbnail": "https://mediasite.example.com/mediasite/api/presentations/abc123def456/thumbnail"
+                },
+                {
+                    "title": "Advanced Topics Overview",
+                    "date_formatted": "January 8, 2026",
+                    "duration_formatted": "60 minutes",
+                    "source": "https://mediasite.example.com/Mediasite/Play/xyz789uvw321",
+                    "thumbnail": "https://mediasite.example.com/mediasite/api/presentations/xyz789uvw321/thumbnail"
+                }
+            ]
+        }
         ]
     }
 }}
-{{#presentations}}
+{{#presentations.list}}
 <div class="presentation">
     <div class="presentation_details">
         <div class="title">{{title}}</div>
@@ -43,4 +54,4 @@
     </div>
     <div class="presentation_thumbnail">{{#thumbnail}}<img alt="{{#str}} thumbnailof, tiny_embedmediasite {{/str}} {{title}}" src="{{thumbnail}}">{{/thumbnail}}</div>
 </div>
-{{/presentations}}
+{{/presentations.list}}
