@@ -25,8 +25,8 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component    = 'tiny_embedmediasite';
-$plugin->release      = '1.0';
-$plugin->version      = 2026011000;
+$plugin->release      = '1.1';
+$plugin->version      = 2026011001;
 $plugin->requires     = 2024100700;
 $plugin->dependencies = ['repository_mediasite' => 2026011001];
 $plugin->supported    = [405, 501];
