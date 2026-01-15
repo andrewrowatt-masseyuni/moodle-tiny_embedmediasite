@@ -7,7 +7,7 @@ A TinyMCE editor plugin for Moodle that enables embedding Mediasite videos direc
 
 The Embed Mediasite Video plugin adds a button to the TinyMCE editor toolbar that lets instructors easily embed Mediasite videos into course content. When the button is clicked, users can browse their Mediasite content and select a video to embed. Once inserted, videos are displayed as links in the editor, but when saved and viewed will render as embedded videos if the companion plugin ([media_mediasite](https://github.com/andrewrowatt-masseyuni/moodle-media_mediasite)) is installed.
 
-This plugin requires the MyMediasite repository plugin ([repository_mymediasite](https://github.com/andrewrowatt-masseyuni/moodle-repository_mymediasite)) to function.
+This plugin requires the MyMediasite repository plugin ([repository_mediasite](https://github.com/andrewrowatt-masseyuni/moodle-repository_mediasite)) to function.
 
 ## Installing via uploaded ZIP file
 
@@ -42,4 +42,5 @@ This program is free software: you can redistribute it and/or modify it under th
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
+
 
