@@ -27,6 +27,8 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['duration'] = 'Duration';
 $string['embedhelptext'] = '<b>Note: </b>In the editor, a link will be displayed. The video will display as embedded when saved.';
+$string['embedvideo'] = 'Embed video';
+$string['insertlinkonly'] = 'Insert link only';
 $string['insertmediasitelink'] = 'Insert';
 $string['loadingmorecontent'] = 'Loading more content...';
 $string['menutitle'] = 'Mediasite video';
