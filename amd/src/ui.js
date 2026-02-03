@@ -60,10 +60,20 @@ const displayDialogue = async(editor) => {
     contentContainer.addEventListener('click', async event => {
         const target = event.target;
         if (target && target.classList.contains('tiny-embedmediasite-insert-button')) {
+            event.preventDefault();
+            const mode = target.dataset.mode;
+            const source = target.dataset.source;
+            const title = target.dataset.title;
+            
+            let templateName = 'tiny_embedmediasite/_embedlink';
+            if (mode === 'linkonly') {
+                templateName = 'tiny_embedmediasite/_linkonly';
+            }
+            
             const {html} = await Templates.renderForPromise(
-                'tiny_embedmediasite/_embedlink', {
-                    source: target.dataset.source,
-                    title: target.dataset.title
+                templateName, {
+                    source: source,
+                    title: title
                 });
             editor.insertContent(html);
             modal.destroy();

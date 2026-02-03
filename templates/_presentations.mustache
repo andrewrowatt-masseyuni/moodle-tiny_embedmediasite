@@ -52,7 +52,15 @@
         <div class="metadata">
             <div class="date" title="{{#str}} timecreated {{/str}}"><span>{{#str}} timecreated {{/str}}</span><small>{{date_formatted}}</small></div><div class="date" title="{{#str}} duration, tiny_embedmediasite {{/str}}"><span>{{#str}} duration, tiny_embedmediasite {{/str}}</span><small>{{duration_formatted}}</small></div>
         </div>
-        <div class="actions"><button class="btn btn-secondary btn-sm tiny-embedmediasite-insert-button" data-title="{{title}}" data-source="{{source}}">{{#str}} insertmediasitelink, tiny_embedmediasite {{/str}}</button><a class="ml-2 btn btn-secondary btn-sm tiny-embedmediasite-view" href="{{source}}" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> {{#str}} view {{/str}}</a></div>
+        <div class="actions"><div class="btn-group">
+  <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    {{#str}} insertmediasitelink, tiny_embedmediasite {{/str}}
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item tiny-embedmediasite-insert-button" href="#" data-title="{{title}}" data-source="{{source}}" data-mode="embed">{{#str}} embedvideo, tiny_embedmediasite {{/str}}</a>
+    <a class="dropdown-item tiny-embedmediasite-insert-button" href="#" data-title="{{title}}" data-source="{{source}}" data-mode="linkonly">{{#str}} insertlinkonly, tiny_embedmediasite {{/str}}</a>
+  </div>
+</div><a class="ml-2 btn btn-secondary btn-sm tiny-embedmediasite-view" href="{{source}}" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> {{#str}} view {{/str}}</a></div>
     </div>
     <div class="presentation_thumbnail">{{#thumbnail}}<img alt="{{#str}} thumbnailof, tiny_embedmediasite {{/str}} {{title}}" src="{{thumbnail}}">{{/thumbnail}}</div>
 </div>
