@@ -64,12 +64,12 @@ const displayDialogue = async(editor) => {
             const mode = target.dataset.mode;
             const source = target.dataset.source;
             const title = target.dataset.title;
-            
+
             let templateName = 'tiny_embedmediasite/_embedlink';
             if (mode === 'linkonly') {
                 templateName = 'tiny_embedmediasite/_linkonly';
             }
-            
+
             const {html} = await Templates.renderForPromise(
                 templateName, {
                     source: source,
