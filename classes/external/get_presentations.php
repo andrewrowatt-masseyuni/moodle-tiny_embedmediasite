@@ -84,6 +84,7 @@ class get_presentations extends external_api {
                     'duration' => new external_value(PARAM_INT, 'Presentation duration in milliseconds'),
                     'duration_formatted' => new external_value(PARAM_TEXT, 'Presentation duration formatted'),
                     'description' => new external_value(PARAM_TEXT, 'Presentation description'),
+                    'parentfoldername' => new external_value(PARAM_TEXT, 'Presentation parent folder name'),
                     'thumbnail' => new external_value(PARAM_URL, 'Presentation thumbnail URL', VALUE_OPTIONAL),
                 ])
             ),

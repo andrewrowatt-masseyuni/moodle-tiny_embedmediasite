@@ -75,6 +75,7 @@ class util {
                 'duration' => $duration,
                 'duration_formatted' => $duration > 0 ? self::format_duration($duration) : '',
                 'description' => $presentation['Description'] ?? '',
+                'parentfoldername' => $presentation['ParentFolderName'] ?? '',
             ];
 
             if (!empty($presentation['ThumbnailUrl'])) {

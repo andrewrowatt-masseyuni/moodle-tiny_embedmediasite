@@ -37,6 +37,7 @@ $string['duration_second'] = 'Second';
 $string['duration_seconds'] = 'Seconds';
 $string['embedhelptext'] = '<b>Note: </b>In the editor, a link will be displayed. The video will display as embedded when saved.';
 $string['embedvideo'] = 'Embed video';
+$string['folder'] = 'Folder';
 $string['includedescription'] = 'Include description';
 $string['information'] = 'Your Mediasite administrator, host or provider will need to supply these credentials.';
 $string['insertlinkonly'] = 'Insert link only';
