@@ -31,7 +31,7 @@ class mediasite_client {
         $g = fn(string $n) => get_config('tiny_embedmediasite', $n);
         $p = $g('manageurl');
         return new self([
-            'root'   => rtrim($g('basemediasiteurl'), '/'),
+            'root'   => $g('basemediasiteurl'),
             'key'    => $g('sfapikey'),
             'auth'   => $g('authorization'),
             'portal' => ($p !== false && $p !== '') ? $p : null,
@@ -60,25 +60,29 @@ class mediasite_client {
         ];
 
         if ($this->cfg['portal'] !== null) {
-            $envelope['manage'] = $this->cfg['portal'];
+            $envelope['manage'] = 'https://' . $this->cfg['portal'];
         }
 
         return $envelope;
     }
 
     private function do_query(string $who, int $idx): string {
-        $off = $idx * $this->chunk;
-        $qs  = http_build_query([
-            '$select'  => 'full',
-            '$orderby' => 'CreationDate desc',
-            '$top'     => $this->chunk,
-            '$skip'    => $off,
-            '$filter'  => "Creator eq '{$who}'",
-        ], '', '&');
+        $off = ($idx - 1) * $this->chunk;
+
+        $ordering = urlencode('CreationDate desc');
+        $criteria = urlencode("Creator eq '{$who}'");
+
+        $url = 'https://' . $this->cfg['root']
+            . '/Api/v1/Presentations'
+            . '?$select=full'
+            . '&$orderby=' . $ordering
+            . '&$top=' . $this->chunk
+            . '&$skip=' . $off
+            . '&$filter=' . $criteria;
 
         $h = new \curl();
         $h->setHeader($this->auth_headers());
-        $r = $h->get($this->cfg['root'] . '/Api/v1/Presentations?' . $qs);
+        $r = $h->get($url);
 
         if ($h->get_errno()) {
             throw new \moodle_exception('mediasiteapierror', 'tiny_embedmediasite');
@@ -98,17 +102,18 @@ class mediasite_client {
     private function reshape(array $v): array {
         global $CFG, $OUTPUT;
 
-        $when = self::parse_odata_ts($v['CreationDate'] ?? '');
+        $when = strtotime($v['CreationDate'] ?? '');
         $ms   = isset($v['Duration']) ? intval($v['Duration']) : 0;
         $pid  = $v['Id'] ?? '';
 
         $out = [
             'title'              => $v['Title'] ?? '',
-            'source'             => $v['PlayerUrl'] ?? '',
+            'source'             => 'https://' . $this->cfg['root'] . '/Play/' . $pid,
             'date'               => $when,
-            'date_formatted'     => userdate($when),
-            'author'             => $v['Owner'] ?? '',
-            'icon'               => $OUTPUT->image_url(file_mimetype_icon('video/mp4'))->out(false),
+            'date_formatted'     => userdate($when, get_string('strftimedatetime', 'langconfig')),
+            'author'             => $v['Creator'] ?? '',
+            // Use video/mpeg rather than video/mp4 — the latter shows a Flash icon in Boost.
+            'icon'               => $OUTPUT->image_url(file_mimetype_icon('video/mpeg'))->out(false),
             'thumbnail_width'    => 400,
             'thumbnail_height'   => 400,
             'mimetype'           => 'Video',
@@ -116,17 +121,13 @@ class mediasite_client {
             'duration_formatted' => self::ms_to_text($ms),
         ];
 
-        if ($pid !== '') {
+        if (!empty($v['ThumbnailUrl'])) {
             $out['thumbnail'] = $CFG->wwwroot
                 . '/lib/editor/tiny/plugins/embedmediasite/thumbnail.php?id='
-                . urlencode($pid);
+                . $pid;
         }
 
         return $out;
-    }
-
-    private static function parse_odata_ts(string $s): int {
-        return preg_match('#Date\((\d+)\)#', $s, $m) ? intval($m[1] / 1000) : 0;
     }
 
     /**

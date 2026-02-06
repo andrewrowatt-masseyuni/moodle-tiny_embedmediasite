@@ -74,7 +74,7 @@ $authval   = need_setting('authorization');
 $apikeyval = need_setting('sfapikey');
 
 // Step 1: ask the API for the thumbnail metadata of this presentation.
-$metaurl = rtrim($serverurl, '/')
+$metaurl = 'https://' . rtrim($serverurl, '/')
     . "/Api/v1/Presentations('" . urlencode($entryid) . "')/ThumbnailContent";
 
 $meta = api_get($metaurl, $authval, $apikeyval);
