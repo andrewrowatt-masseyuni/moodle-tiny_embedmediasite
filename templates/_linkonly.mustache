@@ -22,8 +22,12 @@
     Example context (json):
     {
         "title": "Introduction to Course Content",
-        "source": "https://mediasite.example.com/Mediasite/Play/abc123def456"
+        "source": "https://mediasite.example.com/Mediasite/Play/abc123def456",
+        "description": "An overview of the course content and learning objectives.",
+        "includedescriptionabove": false,
+        "includedescriptionbelow": true
     }
 }}
+{{#includedescriptionabove}}{{#description}}{{ > tiny_embedmediasite/_description }}{{/description}}{{/includedescriptionabove}}
 <a title="{{title}}" href="{{source}}" target="_blank" data-source="tiny_embedmediasite"><span class="nolink">{{title}}</span></a>
-{{#description}}{{ > tiny_embedmediasite/_description }}{{/description}}
+{{#includedescriptionbelow}}{{#description}}{{ > tiny_embedmediasite/_description }}{{/description}}{{/includedescriptionbelow}}

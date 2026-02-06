@@ -28,14 +28,15 @@
                 "duration_formatted": "45 minutes",
                 "source": "https://mediasite.example.com/Mediasite/Play/abc123def456",
                 "thumbnail": "https://mediasite.example.com/mediasite/api/presentations/abc123def456/thumbnail",
-                "description": "Introduction to Course Content"
+                "id": "abc123def456"
             },
             {
                 "title": "Advanced Topics Overview",
                 "date_formatted": "January 8, 2026",
                 "duration_formatted": "60 minutes",
                 "source": "https://mediasite.example.com/Mediasite/Play/xyz789uvw321",
-                "thumbnail": "https://mediasite.example.com/mediasite/api/presentations/xyz789uvw321/thumbnail"
+                "thumbnail": "https://mediasite.example.com/mediasite/api/presentations/xyz789uvw321/thumbnail",
+                "id": "xyz789uvw321"
             }
         ],
         "manage": "https:\/\/webcast.massey.ac.nz\/mediasite\/mymediasite",
@@ -70,13 +71,13 @@
                     <p class="h6 dropdown-header{{^description}} disabled{{/description}}">{{#str}} includedescription, tiny_embedmediasite {{/str}}</p>
                     <div class="dropdown-item" style="display: flex;">
                         <div class="form-check form-check-inline text-nowrap">
-                            <label class="form-check-label" for="inlineRadio1"><input class="form-check-input" type="radio" name="{{id}}description" id="{{id}}descriptionno" value="no" checked{{^description}} disabled{{/description}}>{{#str}} no {{/str}}</label>
+                            <label class="form-check-label" for="{{id}}descriptionno"><input class="form-check-input" type="radio" name="{{id}}description" id="{{id}}descriptionno" value="no" checked{{^description}} disabled{{/description}}>{{#str}} no {{/str}}</label>
                         </div>
                         <div class="form-check form-check-inline text-nowrap">
-                            <label class="form-check-label" for="inlineRadio2"><input class="form-check-input" type="radio" name="{{id}}description" id="{{id}}descriptionabove" value="above"{{^description}} disabled{{/description}}>{{#str}} abovevideo, tiny_embedmediasite {{/str}}</label>
+                            <label class="form-check-label" for="{{id}}descriptionabove"><input class="form-check-input" type="radio" name="{{id}}description" id="{{id}}descriptionabove" value="above"{{^description}} disabled{{/description}}>{{#str}} abovevideo, tiny_embedmediasite {{/str}}</label>
                         </div>
                         <div class="form-check form-check-inline text-nowrap">
-                            <label class="form-check-label" for="inlineRadio3"><input class="form-check-input" type="radio" name="{{id}}description" id="{{id}}descriptionbelow" value="below"{{^description}} disabled{{/description}}>{{#str}} belowvideo, tiny_embedmediasite {{/str}}</label>
+                            <label class="form-check-label" for="{{id}}descriptionbelow"><input class="form-check-input" type="radio" name="{{id}}description" id="{{id}}descriptionbelow" value="below"{{^description}} disabled{{/description}}>{{#str}} belowvideo, tiny_embedmediasite {{/str}}</label>
                         </div>
                     </div>
                     
