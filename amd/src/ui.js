@@ -64,8 +64,9 @@ const displayDialogue = async(editor) => {
             const mode = target.dataset.mode;
             const container = target.closest('.presentation');
             const source = container.dataset.source;
+            const id = container.dataset.id;
             const title = container.dataset.title;
-            const includedescription = container.querySelectorAll(`input[type="checkbox"]`)[0]?.checked;
+            const includedescription = container.querySelectorAll(`input[name="${id}description"][type="checkbox"]`)[0]?.checked;
             const description = includedescription ? container.querySelectorAll('.description p')[0]?.innerText : '';
 
             let templateName;

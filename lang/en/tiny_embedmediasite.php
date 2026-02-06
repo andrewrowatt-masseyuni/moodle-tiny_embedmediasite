@@ -25,8 +25,10 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+$string['abovevideo'] = 'Above video';
 $string['authorization'] = 'Authorization header value';
 $string['basemediasiteurl'] = 'Base Mediasite URL';
+$string['belowvideo'] = 'Below video';
 $string['configplugin'] = 'Embed Mediasite video settings';
 $string['duration'] = 'Duration';
 $string['duration_hour'] = 'Hour';
