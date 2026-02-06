@@ -62,8 +62,11 @@ const displayDialogue = async(editor) => {
         if (target && target.classList.contains('tiny-embedmediasite-insert-button')) {
             event.preventDefault();
             const mode = target.dataset.mode;
-            const source = target.dataset.source;
-            const title = target.dataset.title;
+            const container = target.closest('.presentation');
+            const source = container.dataset.source;
+            const title = container.dataset.title;
+            const includedescription = container.querySelectorAll(`input[type="checkbox"]`)[0]?.checked;
+            const description = includedescription ? container.querySelectorAll('.description p')[0]?.innerText : '';
 
             let templateName;
             if (mode === 'linkonly') {
@@ -76,7 +79,8 @@ const displayDialogue = async(editor) => {
             const {html} = await Templates.renderForPromise(
                 templateName, {
                     source: source,
-                    title: title
+                    title: title,
+                    description: description,
                 });
             editor.insertContent(html);
             modal.destroy();

@@ -16,6 +16,12 @@
                 margin-top: 0.5em;
             }
 
+            .description {
+                p {
+                    font-size: 0.9em;
+                }
+            }
+
             .metadata {
                 display: flex;
                 gap: 1em;
@@ -41,6 +47,7 @@
 
         .presentation_thumbnail {
             img {
+                width: 10em;
                 max-width: 10em;
                 max-height: 10em;
             }
@@ -64,4 +71,10 @@
     b {
         font-weight: 400;
     }
+}
+
+.mu-c4l.tiny_embedmediasite-description {
+    background-color: #f8f9fa;
+    border-radius: .5em;
+    padding: 1em;
 }
