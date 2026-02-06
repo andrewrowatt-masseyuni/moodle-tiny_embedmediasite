@@ -27,7 +27,8 @@
                 "date_formatted": "January 10, 2026",
                 "duration_formatted": "45 minutes",
                 "source": "https://mediasite.example.com/Mediasite/Play/abc123def456",
-                "thumbnail": "https://mediasite.example.com/mediasite/api/presentations/abc123def456/thumbnail"
+                "thumbnail": "https://mediasite.example.com/mediasite/api/presentations/abc123def456/thumbnail",
+                "description": "Introduction to Course Content"
             },
             {
                 "title": "Advanced Topics Overview",
@@ -66,8 +67,7 @@
                     <div class="dropdown-divider"></div>
                     <div class="dropdown-item form-group mb-0{{^description}} disabled{{/description}}">
                         <div class="form-check">
-                        <label class="form-check-label"><input type="checkbox" class="form-check-input" name="groups" value="cohortgroup-{{id}}" {{#description}}checked="checked"{{/description}} data-source="{{source}}">{{#str}} includedescription, tiny_embedmediasite {{/str}}</span>
-                        </label>
+                        <label class="form-check-label"><input type="checkbox" class="form-check-input" name="groups" value="cohortgroup-{{id}}" {{#description}}checked="checked"{{/description}} data-source="{{source}}">{{#str}} includedescription, tiny_embedmediasite {{/str}}</label>
                     </div>   
                     </div>
                 </div>

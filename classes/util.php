@@ -78,7 +78,8 @@ class util {
             ];
 
             if (!empty($presentation['ThumbnailUrl'])) {
-                $listitem['thumbnail'] = $CFG->wwwroot . '/lib/editor/tiny/plugins/embedmediasite/thumbnail.php?id=' . $presentation['Id'];
+                $listitem['thumbnail'] = $CFG->wwwroot . '/lib/editor/tiny/plugins/embedmediasite/thumbnail.php?id=' .
+                $presentation['Id'];
             }
 
             $list[] = $listitem;
