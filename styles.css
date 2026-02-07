@@ -8,6 +8,8 @@
         justify-content: space-between;
 
         .presentation_details {
+            width: 100%;
+
             .title {
                 margin-bottom: 0.5em;
             }
@@ -17,8 +19,26 @@
             }
 
             .description {
+                font-size: 0.9em;
+                background-color: #f8f9fa;
+                border-radius: .5em;
+                padding: 1em;
+
+                margin-bottom: 0.5em;
+
+                span {
+                    display: block;
+                    font-size: 0.5em;
+                    text-transform: uppercase;
+                    line-height: 1.2;
+                    margin: 0;
+                    padding: 0;
+                }
+
                 p {
-                    font-size: 0.9em;
+                    max-height: 12em;
+                    overflow: hidden auto;
+                    margin: 0;
                 }
             }
 
@@ -46,11 +66,27 @@
         }
 
         .presentation_thumbnail {
+            position: relative;
+
             img {
                 width: 10em;
                 max-width: 10em;
                 max-height: 10em;
+                transition: transform 0.2s ease;
+                transform-origin: top right;
             }
+
+            img:hover {
+                transform: scale(4);
+                z-index: 10;
+                position: relative;
+                border: 1px solid rgba(0, 0, 0, 0.15);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+            }
+        }
+
+        label {
+            font-weight: 400;
         }
     }
 }
