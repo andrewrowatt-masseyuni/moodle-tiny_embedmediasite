@@ -64,8 +64,13 @@ const displayDialogue = async(editor) => {
             const mode = target.dataset.mode;
             const container = target.closest('.presentation');
             const source = container.dataset.source;
+            const id = container.dataset.id;
             const title = container.dataset.title;
-            const includedescription = container.querySelectorAll(`input[type="checkbox"]`)[0]?.checked;
+            const descriptionposition =
+                container.querySelectorAll(`input[name="${id}description"][type="radio"]:checked`)[0]?.value;
+            const includedescription = descriptionposition && descriptionposition !== 'no';
+            const includedescriptionabove = descriptionposition === 'above';
+            const includedescriptionbelow = descriptionposition === 'below';
             const description = includedescription ? container.querySelectorAll('.description p')[0]?.innerText : '';
 
             let templateName;
@@ -81,6 +86,8 @@ const displayDialogue = async(editor) => {
                     source: source,
                     title: title,
                     description: description,
+                    includedescriptionabove: includedescriptionabove,
+                    includedescriptionbelow: includedescriptionbelow,
                 });
             editor.insertContent(html);
             modal.destroy();
