@@ -53,6 +53,7 @@ $string['nocontentfound'] = 'No content found';
 $string['nomorecontent'] = 'No more content to display';
 $string['pluginname'] = 'Embed Mediasite video';
 $string['privacy:metadata'] = 'The Embed Mediasite video plugin doesn\'t store any personal data.';
+$string['private'] = 'Private video';
 $string['sfapikey'] = 'API key (sfapikey)';
 $string['thumbnailof'] = 'Thumbnail of';
 $string['toolbartitle'] = 'Embed Mediasite video';

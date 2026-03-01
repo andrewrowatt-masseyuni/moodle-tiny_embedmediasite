@@ -12,6 +12,10 @@
 
             .title {
                 margin-bottom: 0.5em;
+
+                .private {
+                    color: red;
+                }
             }
 
             .actions {

@@ -50,7 +50,7 @@
 {{#list}}
 <div class="presentation" data-id="{{id}}" data-source="{{source}}" data-title="{{title}}">
     <div class="presentation_details">
-        <div class="title">{{title}}</div>
+        <div class="title">{{title}}{{#private}}<small class="private ml-2"><i class="fa-solid fa-circle-exclamation"></i> {{#str}} private, tiny_embedmediasite {{/str}}</small>{{/private}}</div>
         {{#description}}
             <div class="description" title="{{#str}} description {{/str}}"><span>{{#str}} description {{/str}}</span><p>{{description}}</p></div>
         {{/description}}

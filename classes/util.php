@@ -76,6 +76,7 @@ class util {
                 'duration_formatted' => $duration > 0 ? self::format_duration($duration) : '',
                 'description' => $presentation['Description'] ?? '',
                 'parentfoldername' => $presentation['ParentFolderName'] ?? '',
+                'private' => $presentation['Private'] ?? false ? 1 : 0,
                 'id' => $presentation['Id'],
             ];
 
