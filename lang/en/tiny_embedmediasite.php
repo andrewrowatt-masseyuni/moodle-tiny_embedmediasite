@@ -38,7 +38,7 @@ $string['duration_minute'] = 'Minute';
 $string['duration_minutes'] = 'Minutes';
 $string['duration_second'] = 'Second';
 $string['duration_seconds'] = 'Seconds';
-$string['embedhelptext'] = '<b>Note: </b>In the editor, a link will be displayed. The video will display as embedded when saved.';
+$string['modalfooterhelptext'] = 'For general Mediasite support and guidance, please refer to the <a href="https://masseyuni.sharepoint.com/sites/DigitalInnovationProject/SitePages/mediasite.aspx" target="_blank">Mediasite Support Portal</a>.';
 $string['embedvideo'] = 'Embed video';
 $string['folder'] = 'Folder';
 $string['includedescription'] = 'Include description';
