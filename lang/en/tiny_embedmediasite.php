@@ -26,7 +26,8 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['abovevideo'] = 'Above video';
-$string['authorization'] = 'Authorization header value';
+$string['apipassword'] = 'API password';
+$string['apiusername'] = 'API username';
 $string['basemediasiteurl'] = 'Base Mediasite URL';
 $string['belowvideo'] = 'Below video';
 $string['configplugin'] = 'Embed Mediasite video settings';

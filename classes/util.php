@@ -119,17 +119,19 @@ class util {
 
         $basemediasiteurl = get_config(self::M_COMPONENT, 'basemediasiteurl');
         $sfapikey = get_config(self::M_COMPONENT, 'sfapikey');
-        $authorization = get_config(self::M_COMPONENT, 'authorization');
+        $apiusername = get_config(self::M_COMPONENT, 'apiusername');
+        $apipassword = get_config(self::M_COMPONENT, 'apipassword');
+        $authorization = 'SfIdentTicket ' . base64_encode("{$apiusername}:{$apipassword}:{$USER->username}");
 
         $skip = ($page - 1) * self::MEDIASITE_API_PAGE_SIZE; // Page is one-based.
 
         $orderby = urlencode('CreationDate desc');
-        $filter = urlencode("Creator eq '{$USER->username}'");
+        $filter = '&$filter=' . urlencode("PlayStatus ne 'ScheduledForLive'"); // Exclude upcoming recording placeholders.
 
         $endpoint = "https://$basemediasiteurl" .
             "/Api/v1/Presentations?\$select=full&\$orderby=$orderby&\$top="
             . self::MEDIASITE_API_PAGE_SIZE .
-            "&\$skip=$skip&\$filter=$filter";
+            "&\$skip=$skip$filter";
 
         $ch = new curl();
         $ch->setHeader([

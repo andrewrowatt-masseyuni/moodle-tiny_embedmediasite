@@ -53,8 +53,16 @@ if ($hassiteconfig) {
     ));
 
     $page->add(new admin_setting_configtext(
-        'tiny_embedmediasite/authorization',
-        new lang_string('authorization', 'tiny_embedmediasite'),
+        'tiny_embedmediasite/apiusername',
+        new lang_string('apiusername', 'tiny_embedmediasite'),
+        '',
+        '',
+        PARAM_TEXT
+    ));
+
+    $page->add(new admin_setting_configpasswordunmask(
+        'tiny_embedmediasite/apipassword',
+        new lang_string('apipassword', 'tiny_embedmediasite'),
         '',
         '',
         PARAM_TEXT
