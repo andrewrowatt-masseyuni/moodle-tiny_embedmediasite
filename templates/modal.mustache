@@ -49,10 +49,10 @@
 }}
 {{< core/modal }}
     {{$title}}
-        <div class="d-flex align-items-center w-100" id="tiny_embedmediasite_title">
+        <span class="d-flex align-items-center w-100" id="tiny_embedmediasite_title">
             <span class="mr-2 text-nowrap">{{#str}} pluginname, tiny_embedmediasite {{/str}}</span>
-            <div class="input-group input-group-sm">
-                <div class="position-relative flex-grow-1">
+            <span class="input-group input-group-sm">
+                <span class="position-relative flex-grow-1">
                     <input type="text" id="tiny_embedmediasite_filter" name="filter" class="form-control"
                             style="padding-right: 2rem;"
                             placeholder="{{#str}} filterplaceholder, tiny_embedmediasite {{/str}}">
@@ -61,15 +61,15 @@
                             aria-label="{{#str}} clearfilter, tiny_embedmediasite {{/str}}" title="{{#str}} clearfilter, tiny_embedmediasite {{/str}}">
                         <i class="fa-solid fa-xmark"></i>
                     </button>
-                </div>
-                <div class="input-group-append">
+                </span>
+                <span class="input-group-append">
                     <button class="btn btn-outline-secondary" type="button" id="tiny_embedmediasite_search"
                             disabled aria-label="{{#str}} search, tiny_embedmediasite {{/str}}" title="{{#str}} search, tiny_embedmediasite {{/str}}">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </button>
-                </div>
-            </div>
-        </div>
+                </span>
+            </span>
+        </span>
     {{/title}}
     {{$body}}
         <div id="tiny_embedmediasite_content-container">
