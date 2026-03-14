@@ -39,6 +39,7 @@ $string['duration_minutes'] = 'Minutes';
 $string['duration_second'] = 'Second';
 $string['duration_seconds'] = 'Seconds';
 $string['embedvideo'] = 'Embed video';
+$string['filterplaceholder'] = 'Filter title';
 $string['folder'] = 'Folder';
 $string['includedescription'] = 'Include description';
 $string['information'] = 'Your Mediasite administrator, host or provider will need to supply these credentials.';
