@@ -73,4 +73,15 @@ final class get_presentations_test extends \advanced_testcase {
         $this->assertArrayHasKey('page', $params->keys);
         $this->assertSame(PARAM_INT, $params->keys['page']->type);
     }
+
+    /**
+     * The filter input parameter must be declared as PARAM_TEXT with a default empty string.
+     */
+    public function test_input_declares_filter_param(): void {
+        $params = get_presentations::execute_parameters();
+        $this->assertArrayHasKey('filter', $params->keys);
+        $this->assertSame(PARAM_TEXT, $params->keys['filter']->type);
+        $this->assertSame(VALUE_DEFAULT, $params->keys['filter']->required);
+        $this->assertSame('', $params->keys['filter']->default);
+    }
 }

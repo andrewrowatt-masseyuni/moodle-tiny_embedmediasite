@@ -42,6 +42,7 @@ class get_presentations extends external_api {
     public static function execute_parameters(): external_function_parameters {
         return new external_function_parameters([
             'page' => new external_value(PARAM_INT, 'Page number'),
+            'filter' => new external_value(PARAM_TEXT, 'Filter text', VALUE_DEFAULT, ''),
         ]);
     }
 
@@ -49,19 +50,20 @@ class get_presentations extends external_api {
      * Implementation of web service tiny_embedmediasite_get_presentations
      *
      * @param int $page
+     * @param string $filter
      */
-    public static function execute($page) {
+    public static function execute($page, $filter = '') {
         // Parameter validation.
-        ['page' => $page] = self::validate_parameters(
+        ['page' => $page, 'filter' => $filter] = self::validate_parameters(
             self::execute_parameters(),
-            ['page' => $page]
+            ['page' => $page, 'filter' => $filter]
         );
 
         // From web services we don't call require_login(), but rather validate_context.
         $context = \context_system::instance();
         self::validate_context($context);
 
-        $presentations = \tiny_embedmediasite\util::get_mediasite_presentations($page);
+        $presentations = \tiny_embedmediasite\util::get_mediasite_presentations($page, $filter);
 
         return $presentations;
     }

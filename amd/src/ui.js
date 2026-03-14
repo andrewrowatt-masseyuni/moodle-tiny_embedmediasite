@@ -42,14 +42,12 @@ export const handleAction = async(editor) => {
  */
 const displayDialogue = async(editor) => {
     let page = 1; // Track which "page" of data to load
+    let currentFilter = '';
+    let searchGeneration = 0;
 
-    // Get first page of presentations. The template (mostly) handles the case of zero presentations.
-    let presentations = await getMyMediasitePresentations(page)
-            .catch((error) => displayException(error));
-
-    // Show modal with buttons.
+    // Show modal immediately with loading state (empty context).
     const modal = await EmbedMediasiteModal.create({
-        templateContext: presentations,
+        templateContext: {},
         large: true,
         removeOnClose: true,
     });
@@ -57,6 +55,13 @@ const displayDialogue = async(editor) => {
     await modal.show();
 
     const contentContainer = document.getElementById('tiny_embedmediasite_content-container');
+    const loadingIndicator = document.getElementById('tiny_embedmediasite_loading');
+    const noMoreContentIndicator = document.getElementById('tiny_embedmediasite_no_more_content');
+    const noContentFoundIndicator = document.getElementById('tiny_embedmediasite_no_content_found');
+    const filterInput = document.getElementById('tiny_embedmediasite_filter');
+    const searchButton = document.getElementById('tiny_embedmediasite_search');
+    const clearButton = document.getElementById('tiny_embedmediasite_clear');
+
     contentContainer.addEventListener('click', async event => {
         const target = event.target;
         if (target && target.classList.contains('tiny-embedmediasite-insert-button')) {
@@ -94,21 +99,24 @@ const displayDialogue = async(editor) => {
         }
     });
 
-    const loadingIndicator = document.getElementById('tiny_embedmediasite_loading');
-    const noMoreContentIndicator = document.getElementById('tiny_embedmediasite_no_more_content');
-
     /**
      * Load the second and subsequent pages of content.
      *
-     * @param {*} pageNumber
+     * @param {number} pageNumber
+     * @param {number} generation
      * @return {number} Number of presentations loaded
      */
-    async function loadMoreContent(pageNumber) {
+    async function loadMoreContent(pageNumber, generation) {
         // Get a page of presentations.
-        const presentations = await getMyMediasitePresentations(pageNumber)
+        const presentations = await getMyMediasitePresentations(pageNumber, currentFilter)
             .catch((error) => displayException(error));
 
-        if (!presentations.list?.length) {
+        // Discard stale results from a previous search.
+        if (generation !== searchGeneration) {
+            return 0;
+        }
+
+        if (!presentations?.list?.length) {
             // Short circuit if no presentations.
             return 0;
         }
@@ -130,7 +138,7 @@ const displayDialogue = async(editor) => {
             observer.unobserve(loadingIndicator);
 
             page++;
-            if (await loadMoreContent(page)) {
+            if (await loadMoreContent(page, searchGeneration)) {
                 // Re-observe the indicator after fetch completes
                 observer.observe(loadingIndicator);
             } else {
@@ -145,6 +153,83 @@ const displayDialogue = async(editor) => {
         rootMargin: '0px'
     });
 
-    // Start observing the loading indicator element
-    observer.observe(loadingIndicator);
+    // Load the first page of presentations now that the modal is visible.
+    if (await loadMoreContent(page, searchGeneration)) {
+        observer.observe(loadingIndicator);
+    } else {
+        loadingIndicator.style.display = 'none';
+        noContentFoundIndicator.style.display = 'block';
+    }
+
+    // Enable search button only when filter has 3 or more characters. Show clear button when there is text.
+    filterInput.addEventListener('input', () => {
+        searchButton.disabled = filterInput.value.length < 3;
+        clearButton.style.display = filterInput.value.length > 0 ? '' : 'none';
+    });
+
+    /**
+     * Execute a search with the current filter text.
+     */
+    async function executeSearch() {
+        currentFilter = filterInput.value.trim();
+        page = 1;
+        searchGeneration++;
+        const generation = searchGeneration;
+
+        // Reset the UI.
+        contentContainer.innerHTML = '';
+        noMoreContentIndicator.style.display = 'none';
+        noContentFoundIndicator.style.display = 'none';
+        loadingIndicator.style.display = 'block';
+        observer.unobserve(loadingIndicator);
+        searchButton.disabled = true;
+
+        const results = await getMyMediasitePresentations(page, currentFilter)
+            .catch((error) => displayException(error));
+
+        // Discard if a newer search has started.
+        if (generation !== searchGeneration) {
+            return;
+        }
+
+        searchButton.disabled = filterInput.value.length < 3;
+
+        if (!results?.list?.length) {
+            loadingIndicator.style.display = 'none';
+            noContentFoundIndicator.style.display = 'block';
+            return;
+        }
+
+        // Render results.
+        const {html, js} = await Templates.renderForPromise(
+            'tiny_embedmediasite/_presentations',
+            results
+        );
+        Templates.appendNodeContents('#tiny_embedmediasite_content-container', html, js);
+
+        // Re-observe for infinite scroll.
+        observer.observe(loadingIndicator);
+    }
+
+    // Search button click handler.
+    searchButton.addEventListener('click', executeSearch);
+
+    // Clear button resets the filter and re-fetches all presentations.
+    clearButton.addEventListener('click', () => {
+        const hadFilter = currentFilter !== '';
+        filterInput.value = '';
+        clearButton.style.display = 'none';
+        searchButton.disabled = true;
+        if (hadFilter) {
+            executeSearch();
+        }
+    });
+
+    // Allow Enter key to trigger search when button is enabled.
+    filterInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' && !searchButton.disabled) {
+            event.preventDefault();
+            executeSearch();
+        }
+    });
 };
