@@ -49,15 +49,35 @@
 }}
 {{< core/modal }}
     {{$title}}
-        {{#str}} pluginname, tiny_embedmediasite {{/str}}
+        <span class="d-flex align-items-center w-100" id="tiny_embedmediasite_title">
+            <span class="mr-2 text-nowrap">{{#str}} pluginname, tiny_embedmediasite {{/str}}</span>
+            <span class="input-group input-group-sm">
+                <span class="position-relative flex-grow-1">
+                    <input type="text" id="tiny_embedmediasite_filter" name="filter" class="form-control"
+                            style="padding-right: 2rem;"
+                            placeholder="{{#str}} filterplaceholder, tiny_embedmediasite {{/str}}">
+                    <button class="btn btn-link btn-sm text-muted" type="button" id="tiny_embedmediasite_clear"
+                            style="display: none; position: absolute; right: 0; top: 50%; transform: translateY(-50%); z-index: 4; padding: 0 .4rem;"
+                            aria-label="{{#str}} clearfilter, tiny_embedmediasite {{/str}}" title="{{#str}} clearfilter, tiny_embedmediasite {{/str}}">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </span>
+                <span class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="tiny_embedmediasite_search"
+                            disabled aria-label="{{#str}} search, tiny_embedmediasite {{/str}}" title="{{#str}} search, tiny_embedmediasite {{/str}}">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </span>
+            </span>
+        </span>
     {{/title}}
     {{$body}}
         <div id="tiny_embedmediasite_content-container">
         {{> tiny_embedmediasite/_presentations }}
         </div>
-        <div id="tiny_embedmediasite_loading"{{^list}} style="display: none;"{{/list}}><i class="fa-solid fa-sync fa-spin"></i> {{#str}} loadingmorecontent, tiny_embedmediasite {{/str}}</div>
+        <div id="tiny_embedmediasite_loading"><i class="fa-solid fa-sync fa-spin"></i> {{#str}} loadingmorecontent, tiny_embedmediasite {{/str}}</div>
         <div id="tiny_embedmediasite_no_more_content" style="display: none;">{{#str}} nomorecontent, tiny_embedmediasite {{/str}}</div>
-        {{^list}}<div id="tiny_embedmediasite_no_content_found">{{#str}} nocontentfound, tiny_embedmediasite {{/str}}</div>{{/list}}
+        <div id="tiny_embedmediasite_no_content_found" style="display: none;">{{#str}} nocontentfound, tiny_embedmediasite {{/str}}</div>
     {{/body}}
     {{$footer}}
         <div id="tiny_embedmediasite_footer">

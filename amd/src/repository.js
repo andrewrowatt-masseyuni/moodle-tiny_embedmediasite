@@ -25,9 +25,11 @@ import {call as fetchMany} from 'core/ajax';
 
 export const getMyMediasitePresentations = (
     page,
+    filter = '',
 ) => fetchMany([{
     methodname: 'tiny_embedmediasite_get_presentations',
     args: {
         page,
+        filter,
     },
 }])[0];

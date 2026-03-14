@@ -43,14 +43,15 @@ class util {
      * Transforms the list of presentations from the Mediasite for use by the Resposity API
      *
      * @param int $page
+     * @param string $filter
      * @return array{list: array, manage?: string, nologin: bool, norefresh: bool, nosearch: bool, page: int, pages: int}
      */
-    public static function get_mediasite_presentations(int $page): array {
+    public static function get_mediasite_presentations(int $page, string $filter = ''): array {
         global $CFG, $OUTPUT;
 
         $basemediasiteurl = get_config(self::M_COMPONENT, 'basemediasiteurl');
 
-        $presentations = self::get_presentations($page);
+        $presentations = self::get_presentations($page, $filter);
 
         $list = [];
 
@@ -100,7 +101,7 @@ class util {
 
         $result['nologin'] = true;
         $result['norefresh'] = true;
-        $result['nosearch'] = true;
+        $result['nosearch'] = false;
         $result['page'] = $page;
         $result['pages'] = ceil($presentations['odata.count'] / self::MEDIASITE_API_PAGE_SIZE);
 
@@ -111,10 +112,11 @@ class util {
      * Use the Mediasite API to get a list of presentations for the current user.
      *
      * @param int $page
+     * @param string $filter
      * @throws moodle_exception
      * @return array
      */
-    private static function get_presentations(int $page): array {
+    private static function get_presentations(int $page, string $filter = ''): array {
         global $USER;
 
         $basemediasiteurl = get_config(self::M_COMPONENT, 'basemediasiteurl');
@@ -126,12 +128,16 @@ class util {
         $skip = ($page - 1) * self::MEDIASITE_API_PAGE_SIZE; // Page is one-based.
 
         $orderby = urlencode('CreationDate desc');
-        $filter = '&$filter=' . urlencode("PlayStatus ne 'ScheduledForLive'"); // Exclude upcoming recording placeholders.
+        $filterquery = '';
+        if ($filter !== '') {
+            $escapedfilter = str_replace("'", "''", $filter);
+            $filterquery = '&$filter=' . urlencode("Title eq '" . $escapedfilter . "'");
+        }
 
         $endpoint = "https://$basemediasiteurl" .
             "/Api/v1/Presentations?\$select=full&\$orderby=$orderby&\$top="
             . self::MEDIASITE_API_PAGE_SIZE .
-            "&\$skip=$skip$filter";
+            "&\$skip=$skip$filterquery";
 
         $ch = new curl();
         $ch->setHeader([
