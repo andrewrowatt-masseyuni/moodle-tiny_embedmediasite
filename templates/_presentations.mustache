@@ -86,6 +86,6 @@
             <a class="ml-2 btn btn-secondary btn-sm tiny-embedmediasite-view" href="{{source}}" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> {{#str}} view {{/str}}</a>
         </div>
     </div>
-    <div class="presentation_thumbnail">{{#thumbnail}}<img alt="{{#str}} thumbnailof, tiny_embedmediasite {{/str}} {{title}}" src="{{thumbnail}}">{{/thumbnail}}</div>
+    <div class="presentation_thumbnail">{{#thumbnail}}<img alt="{{#str}} thumbnailof, tiny_embedmediasite {{/str}} {{title}}" src="{{thumbnail}}">{{/thumbnail}}{{^thumbnail}}<div class="d-flex justify-content-center align-items-center h-100 border border-secondary"><span class="small text-muted">{{#str}} nothumbnail, tiny_embedmediasite {{/str}}</span></div>{{/thumbnail}}</div>
 </div>
 {{/list}}

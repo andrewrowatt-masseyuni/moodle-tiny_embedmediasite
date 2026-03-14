@@ -54,6 +54,7 @@ $string['menutitle'] = 'Mediasite video';
 $string['modalfooterhelptext'] = 'For general Mediasite support and guidance, please refer to the <a href="https://masseyuni.sharepoint.com/sites/DigitalInnovationProject/SitePages/mediasite.aspx" target="_blank">Mediasite Support Portal</a>.';
 $string['nocontentfound'] = 'No content found';
 $string['nomorecontent'] = 'No more content to display';
+$string['nothumbnail'] = 'Thumbnail not available';
 $string['pluginname'] = 'Embed Mediasite video';
 $string['privacy:metadata'] = 'The Embed Mediasite video plugin doesn\'t store any personal data.';
 $string['private'] = 'Private video';
